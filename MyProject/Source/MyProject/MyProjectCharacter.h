@@ -50,6 +50,8 @@ protected:
 	/** Fires a projectile. */
 	void OnPrimaryAction();
 
+	void InteractRaycast();
+
 	/** Handles moving forward/backward */
 	void MoveForward(float Val);
 
@@ -99,6 +101,9 @@ public:
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 };
 

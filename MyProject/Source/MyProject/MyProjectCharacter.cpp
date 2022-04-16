@@ -41,7 +41,14 @@ void AMyProjectCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+}
 
+// Called every frame
+void AMyProjectCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	InteractRaycast();
 }
 
 //////////////////////////////////////////////////////////////////////////// Input
@@ -74,10 +81,8 @@ void AMyProjectCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &AMyProjectCharacter::LookUpAtRate);
 }
 
-void AMyProjectCharacter::OnPrimaryAction()
+void AMyProjectCharacter::InteractRaycast()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnPrimaryAction 2"));
-
 	FHitResult outHit;
 	FVector start = FirstPersonCameraComponent->GetComponentLocation();
 	FVector rayDirection = FirstPersonCameraComponent->GetForwardVector();
@@ -102,6 +107,11 @@ void AMyProjectCharacter::OnPrimaryAction()
 			UE_LOG(LogTemp, Log, TEXT("hit %s"), *name);
 		}
 	}
+}
+
+void AMyProjectCharacter::OnPrimaryAction()
+{
+	UE_LOG(LogTemp, Log, TEXT("OnPrimaryAction"));
 
 	// Trigger the OnItemUsed Event
 	OnUseItem.Broadcast();
