@@ -76,6 +76,33 @@ void AMyProjectCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 
 void AMyProjectCharacter::OnPrimaryAction()
 {
+	UE_LOG(LogTemp, Warning, TEXT("OnPrimaryAction 2"));
+
+	FHitResult outHit;
+	FVector start = FirstPersonCameraComponent->GetComponentLocation();
+	FVector rayDirection = FirstPersonCameraComponent->GetForwardVector();
+	float interactionRange = 200.0f; // 1 metre
+	FVector end = start + (rayDirection * interactionRange);
+
+	FCollisionQueryParams collisionParams;
+	collisionParams.AddIgnoredActor(this->GetOwner());
+	DrawDebugLine(GetWorld(), start, end, FColor::Green, false, 1, 0, 1);
+
+	bool isHit = GetWorld()->LineTraceSingleByChannel(outHit, start, end, ECC_Visibility, collisionParams);
+	if (isHit)
+	{
+		AActor* hitActor = outHit.GetActor();
+		if (hitActor == nullptr)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("actor is null"));
+		}
+		else
+		{
+			FString name = hitActor->GetActorNameOrLabel();
+			UE_LOG(LogTemp, Log, TEXT("hit %s"), *name);
+		}
+	}
+
 	// Trigger the OnItemUsed Event
 	OnUseItem.Broadcast();
 }
