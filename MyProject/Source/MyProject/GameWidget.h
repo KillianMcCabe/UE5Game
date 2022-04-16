@@ -14,15 +14,15 @@ class UGameWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test", meta = (BindWidget))
+	class UTextBlock* textLabel;
+
 protected:
 
 	// Doing setup in the C++ constructor is not as
 	// useful as using NativeConstruct.
 	virtual void NativeConstruct() override;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test", meta=(BindWidget))
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Test")
-	//UPROPERTY(BlueprintReadWrite, Category = "Test", meta = (BindWidget))
-	//class UTextBlock* textLabel;
 	
 };

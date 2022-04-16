@@ -28,6 +28,9 @@ void AMyProjectGameMode::BeginPlay()
 		if (gameWidget != nullptr)
 		{
 			gameWidget->AddToViewport();
+
+			gameWidget->textLabel->SetText(FText::FromString("Text is working!"));
+
 			UE_LOG(LogTemp, Log, TEXT("Widget created"));
 		}
 		else
