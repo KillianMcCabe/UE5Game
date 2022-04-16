@@ -91,7 +91,7 @@ void AMyProjectCharacter::InteractRaycast()
 
 	FCollisionQueryParams collisionParams;
 	collisionParams.AddIgnoredActor(this->GetOwner());
-	DrawDebugLine(GetWorld(), start, end, FColor::Green, false, 1, 0, 1);
+	//DrawDebugLine(GetWorld(), start, end, FColor::Green, false, 1, 0, 1);
 
 	bool isHit = GetWorld()->LineTraceSingleByChannel(outHit, start, end, ECC_Visibility, collisionParams);
 	if (isHit)
